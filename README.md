@@ -40,14 +40,15 @@ Swagger работает по url: /docs/*any .<br/>
 }<br/>
 
 Формат запроса на /get_song_by_verses
-{
-   "group":"Red Hot Chili Peppers",
-   "song":"Dark Necessities",
-   "count_verses_on_pages":2,
-   "page":1,
-   "direction":""
-}
+{<br/>
+   "group":"Red Hot Chili Peppers",<br/>
+   "song":"Dark Necessities",<br/>
+   "count_verses_on_pages":2,<br/>
+   "page":1,<br/>
+   "direction":""<br/>
+}<br/>
 
+Чтобы развернуть сервис надо воспользоваться docker<br/>
 Docker:<br/>
 Чтобы использовать docker нужно прописать docker-compose up находясь в папке effective_mobile. !!!Так как docker не видит postgre если host:localhost  в .env он уже
 Настроен на postgre. его можно изменить закомментив строку с postgre и разкоменнтить с localhost<br/>
