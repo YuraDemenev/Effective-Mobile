@@ -21,7 +21,7 @@ handlers - содержит файл с путями по которым буд�
 Связаны таблицы: verses song_id -> songs id. groups id -> songs groupd_id.<br/>
 
 Краткое описание работы программы:<br/>
-В Программе следущие handlers: /create_new_song, /get_all_songs, /info, /delete_song, /change_song, /get_song_by_verses
+В Программе следущие handlers: /create_new_song, /get_all_songs, /info, /delete_song, /change_song, /get_song_by_verses<br/>
 В базе данных находятся 5 базовых песен.<br/>
 Swagger работает по url: /docs/*any .<br/>
 После добавления песни идёт сразу get запрос по /info и возвращается результат /info.<br/>
@@ -32,11 +32,11 @@ Swagger работает по url: /docs/*any .<br/>
 
 Формат запроса на /get_all_songs<br/>
 {<br/>
-  "direction":"",
-  "page":1,
-  "filter":"",
-  "field":"",
-  "count_songs_on_page":2
+  "direction":"",<br/>
+  "page":1,<br/>
+  "filter":"",<br/>
+  "field":"",<br/>
+  "count_songs_on_page":2<br/>
 }<br/>
 
 Формат запроса на /get_song_by_verses
