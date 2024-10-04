@@ -1,0 +1,297 @@
+basePath: /
+definitions:
+  elements.GetSongByVerseStruct:
+    properties:
+      count_verses_on_pages:
+        type: integer
+      direction:
+        type: string
+      group:
+        type: string
+      page:
+        type: integer
+      song:
+        type: string
+      song_id:
+        type: integer
+    type: object
+  elements.SongStruct:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+      song_id:
+        type: integer
+    type: object
+  handlers.CreateNewSongStruct:
+    properties:
+      group:
+        type: string
+      link:
+        type: string
+      release_date:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+    type: object
+  handlers.SetErrorStuct:
+    properties:
+      error:
+        type: string
+      info:
+        type: string
+    type: object
+  handlers.getAllSongsStruct:
+    properties:
+      count_songs_on_page:
+        type: integer
+      direction:
+        type: string
+      field:
+        type: string
+      filter:
+        type: string
+      page:
+        type: integer
+    type: object
+  handlers.getChangeSongStruct:
+    properties:
+      group:
+        type: string
+      id:
+        type: integer
+      link:
+        type: string
+      release_date:
+        type: string
+      song:
+        type: string
+      text:
+        type: string
+    type: object
+  handlers.getSongInfoStruct:
+    properties:
+      group:
+        type: string
+      song:
+        type: string
+    type: object
+  handlers.returnAllSongsStruct:
+    properties:
+      countPages:
+        type: integer
+      songs:
+        items:
+          $ref: '#/definitions/elements.SongStruct'
+        type: array
+    type: object
+  handlers.returnDeleteSongStruct:
+    properties:
+      result:
+        type: string
+    type: object
+  handlers.returnGetSongByVersesStruct:
+    properties:
+      countPages:
+        type: integer
+      song:
+        $ref: '#/definitions/elements.SongStruct'
+      verses:
+        items:
+          type: string
+        type: array
+    type: object
+  handlers.returnSongInfoStruct:
+    properties:
+      link:
+        type: string
+      requestData:
+        type: string
+      text:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Go Music library gin framework
+  title: Effective Mobile API
+  version: "1.0"
+paths:
+  /change_song:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: Меняем данные песни
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.getChangeSongStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnDeleteSongStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: Change song
+      tags:
+      - Songs
+  /create_new_song:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Функция создаёт новую песню из входящих данных
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateNewSongStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnSongInfoStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: Create new song
+      tags:
+      - Songs
+  /delete_song:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Удаление песни
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.getSongInfoStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnDeleteSongStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: Delete song
+      tags:
+      - Songs
+  /get_all_songs:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Фунция возвращает все песни с пагинацией
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.getAllSongsStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnAllSongsStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: Get all songs
+      tags:
+      - Songs
+  /get_song_by_verses:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Получаем песню с куплетами, с пагинацией по куплетам
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/elements.GetSongByVerseStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnGetSongByVersesStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: get song by verses
+      tags:
+      - Songs
+  /info:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Фунция возвращает информацию о песни
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.getAllSongsStruct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.returnSongInfoStruct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handlers.SetErrorStuct'
+      summary: Info
+      tags:
+      - Songs
+swagger: "2.0"

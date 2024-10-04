@@ -1,0 +1,460 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Go Music library gin framework",
+        "title": "Effective Mobile API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/change_song": {
+            "patch": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Change song",
+                "parameters": [
+                    {
+                        "description": "Меняем данные песни",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.getChangeSongStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnDeleteSongStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        },
+        "/create_new_song": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Create new song",
+                "parameters": [
+                    {
+                        "description": "Функция создаёт новую песню из входящих данных",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.CreateNewSongStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnSongInfoStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        },
+        "/delete_song": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Delete song",
+                "parameters": [
+                    {
+                        "description": "Удаление песни",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.getSongInfoStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnDeleteSongStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        },
+        "/get_all_songs": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Get all songs",
+                "parameters": [
+                    {
+                        "description": "Фунция возвращает все песни с пагинацией",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.getAllSongsStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnAllSongsStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        },
+        "/get_song_by_verses": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "get song by verses",
+                "parameters": [
+                    {
+                        "description": "Получаем песню с куплетами, с пагинацией по куплетам",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/elements.GetSongByVerseStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnGetSongByVersesStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        },
+        "/info": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Songs"
+                ],
+                "summary": "Info",
+                "parameters": [
+                    {
+                        "description": "Фунция возвращает информацию о песни",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.getAllSongsStruct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.returnSongInfoStruct"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.SetErrorStuct"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "elements.GetSongByVerseStruct": {
+            "type": "object",
+            "properties": {
+                "count_verses_on_pages": {
+                    "type": "integer"
+                },
+                "direction": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "integer"
+                },
+                "song": {
+                    "type": "string"
+                },
+                "song_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "elements.SongStruct": {
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "song": {
+                    "type": "string"
+                },
+                "song_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handlers.CreateNewSongStruct": {
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "release_date": {
+                    "type": "string"
+                },
+                "song": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.SetErrorStuct": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                },
+                "info": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.getAllSongsStruct": {
+            "type": "object",
+            "properties": {
+                "count_songs_on_page": {
+                    "type": "integer"
+                },
+                "direction": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                },
+                "filter": {
+                    "type": "string"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
+        "handlers.getChangeSongStruct": {
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "release_date": {
+                    "type": "string"
+                },
+                "song": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.getSongInfoStruct": {
+            "type": "object",
+            "properties": {
+                "group": {
+                    "type": "string"
+                },
+                "song": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.returnAllSongsStruct": {
+            "type": "object",
+            "properties": {
+                "countPages": {
+                    "type": "integer"
+                },
+                "songs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/elements.SongStruct"
+                    }
+                }
+            }
+        },
+        "handlers.returnDeleteSongStruct": {
+            "type": "object",
+            "properties": {
+                "result": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.returnGetSongByVersesStruct": {
+            "type": "object",
+            "properties": {
+                "countPages": {
+                    "type": "integer"
+                },
+                "song": {
+                    "$ref": "#/definitions/elements.SongStruct"
+                },
+                "verses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "handlers.returnSongInfoStruct": {
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "requestData": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
